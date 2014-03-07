@@ -3,7 +3,7 @@ sbDropdownSelectMultiple
 
 [![Build Status](https://travis-ci.org/sambs/angular-sb-dropdown-select-multiple.png?branch=master)](https://travis-ci.org/sambs/angular-sb-dropdown-select-multiple)
 
-An angular directive for searching for and selecting one or more options displayed in a dropdown list. 
+AngularJS directive for selecting one or more options displayed in a dropdown list.
 
 Example markup:
 

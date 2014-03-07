@@ -103,7 +103,6 @@ angular.module('sbDropdownSelectMultiple', ['sbTokenInput', 'sbHighlightGroup', 
       }, 500);
 
       scope.select = function (val) {
-        console.log('select', val);
         scope.show = false;
         scope.input = '';
         scope.addToken(val);
