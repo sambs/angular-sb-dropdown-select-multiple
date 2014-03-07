@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en" ng-app="app">
+<head>
+  <meta charset="utf-8">
+  <title>Dropdown Select Multiple Demo</title>
+  <link rel="stylesheet" href="bower_components/angular-sb-token-input/src/token-input.css">
+  <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
+  <style>
+    .dropdown-select-multiple {
+      position: relative;
+    }
+    .dropdown-select-waiting:after {
+      content: '...';
+      position: absolute;
+      right: 0;
+      top: 3px;
+      text-align: right;
+    }
+    .dropdown-select-clear {
+      position: absolute;
+      right: 5px;
+      top: 4px;
+    }
+    .dropdown-select-input {
+      width: 175px;
+      padding: 3px 20px 3px 5px;
+      margin: 0;
+      border: 1px solid #ccc;
+    }
+    .dropdown-select-complete .dropdown-select-input {
+      background-color: #eee;
+     }
+    .dropdown {
+      position: absolute;
+      z-index: 99;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      background: #fff;
+      border: 1px solid #ddd;
+      border-top-width: 0;
+      box-shadow: 0 1px 5px rgba(0,0,0,0.2);
+    }
+    .dropdown-item {
+      padding: 2px 5px;
+      display: block;
+    }
+    .dropdown-highlighted {
+      background-color: red;
+      color: white;
+    }
+    .dropdown ul, 
+    .dropdown li {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .placeholder {
+      color: #aaa;
+    }
+  </style>
+  <style>
+    .token-input {
+      position: relative;
+      height: auto;
+      min-height: 34px;
+      padding: 0 6px;
+      overflow: hidden;
+      cursor: text;
+    }
+
+    .token-input-token,
+    .token-input-input {
+      display: inline-block;
+      float: left;
+      line-height: 18px;
+      padding: 0 5px;
+      margin: 6px;
+      font-size: 14px;
+    }
+
+    .token-input-token {
+      line-height: 18px;
+      padding: 2px 5px;
+      margin: 4px;
+      background-color: #eee;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    }
+
+    .token-input-input {
+      line-height: 24px;
+      padding: 0 5px;
+      margin: 4px;
+    }
+
+    .token-input-token-remove:before {
+      content: "×";
+      margin: 0 0 0 3px;
+      font-weight: bold;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container" ng-controller="Controller">
+    <h1>Dropdown Select Multiple Demo</h1>
+    <div class="row">
+      <form class="col-md-6" novalidate name="form">
+        <div class="form-group">
+          <label>Before</label>
+          <input class="form-control" type="text">
+        </div>
+        <div class="form-group">
+          <label>Locations</label>
+          <div sb-dropdown-select-multiple sb-source="fetchLocationObjs" sb-display-property="display" name="locations" ng-model="obj.locations" sb-tracking-property="display"></div>
+        </div>
+        <pre>
+Dirty: {{form.locations.$dirty}}
+Value: {{obj.locations|json}}
+Errors: {{form.locations.$error|json}}
+        </pre>
+        <div class="form-group">
+          <label>Before</label>
+          <input class="form-control" type="text">
+        </div>
+      </form>
+    </div>
+  </div>
+  <!--[if lt IE 9]><script src="bower_components/es5-shim/es5-shim.js"></script><![endif]-->
+  <script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+  <script src="bower_components/jquery/jquery.js"></script>
+  <script src="bower_components/angular/angular.js"></script>
+  <script src="bower_components/angular-sb-debounce/src/debounce.js"></script>
+  <script src="bower_components/angular-sb-popover/src/popover.js"></script>
+  <script src="bower_components/angular-sb-highlight-group/src/highlight-group.js"></script>
+  <script src="bower_components/angular-sb-measure-text/measure-text.js"></script>
+  <script src="bower_components/angular-sb-token-input/src/token-input.js"></script>
+  <script src="src/dropdown-select-multiple.js"></script>
+  <script>
+    angular.module('app', ['sbDropdownSelectMultiple'])
+
+      .controller('Controller', function ($scope, $q) {
+        $scope.obj = {
+          locations: [{
+            "display": "Plymouth, UK",
+            "value": [ "-4.143", "50.375" ]
+          }]
+        };
+
+        var geocoder = new google.maps.Geocoder();
+
+        $scope.fetchLocationObjs = function (query) {
+          if (!query) return [{ display: 'Your location', value: ['why', 'me']}];
+          var deferred = $q.defer();
+          geocoder.geocode({ address: query }, function (results, status) {
+            deferred.resolve(results.map(resultToObj));
+          });
+          return deferred.promise;
+        };
+
+        function resultToObj (result) {
+          var pt = result.geometry.location;
+          return {
+            display: result.formatted_address,
+            value: [pt.lng().toFixed(3), pt.lat().toFixed(3)]
+          };
+        }
+
+        $scope.fetchLocationStrs = function (query) {
+          if (!query) return [];
+          var deferred = $q.defer();
+          geocoder.geocode({ address: query }, function (results, status) {
+            deferred.resolve(results.map(resultToStr));
+          });
+          return deferred.promise;
+        };
+
+        function resultToStr (result) {
+          return result.formatted_address;
+        }
+      });
+  </script>
+</body>
+</html>

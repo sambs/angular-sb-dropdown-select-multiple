@@ -1,0 +1,25 @@
+{
+  "name": "angular-sb-dropdown-select-multiple",
+  "version": "0.0.1",
+  "main": "src/dropdown-select-multiple.js",
+  "description": "Input multiple selection from a dropdown list",
+  "dependencies": {
+    "jquery": "~1.9.1",
+    "angular": "~1.2.0",
+    "angular-sb-token-input": "~0.2.0",
+    "angular-sb-debounce": "~0.2.0",
+    "angular-sb-popover": "0.1.0",
+    "angular-sb-highlight-group": "0.2.0"
+  },
+  "devDependencies": {
+    "angular-mocks": "~1.2.0",
+    "es5-shim": "~2.3.0"
+  },
+  "keywords": [
+    "angular",
+    "input",
+    "select",
+    "dropdown",
+    "autocomplete"
+  ]
+}
