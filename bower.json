@@ -1,6 +1,6 @@
 {
   "name": "angular-sb-dropdown-select-multiple",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "main": "src/dropdown-select-multiple.js",
   "description": "Input multiple selection from a dropdown list",
   "dependencies": {
