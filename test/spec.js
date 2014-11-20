@@ -4,7 +4,6 @@ describe('sbDropdownSelectMultiple directive', function () {
 
   beforeEach(module('sbDropdownSelectMultiple'));
 
-    
   beforeEach(inject(function (_$q_, _$timeout_) {
     $q = _$q_;
     $timeout = _$timeout_;

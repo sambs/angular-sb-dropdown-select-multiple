@@ -23,7 +23,7 @@ angular.module('sbDropdownSelectMultiple', ['sbTokenInput', 'sbHighlightGroup', 
     };
 
     def.template = [
-      '<div class="dropdown-select-multiple input-container" ng-class="{\'dropdown-select-waiting\': waiting}">',
+      '<div class="dropdown-select-multiple" ng-class="{\'dropdown-select-waiting\': waiting}">',
         parent.template,
         '<div class="dropdown-select-dropdown dropdown" sb-popover-show="show">',
           '<ul sb-highlight-group sb-highlight-class="dropdown-highlighted" sb-disabled="!show" sb-auto-highlight>',
