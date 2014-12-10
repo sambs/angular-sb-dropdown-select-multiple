@@ -19,7 +19,8 @@ angular.module('sbDropdownSelectMultiple', ['sbTokenInput', 'sbHighlightGroup', 
       formatDisplay: '&sbFormatDisplay',
       displayProperty: '@sbDisplayProperty',
       track: '&sbTrack',
-      trackingProperty: '@sbTrackingProperty'
+      trackingProperty: '@sbTrackingProperty',
+      max: '@sbMaxlength'
     };
 
     def.template = [
